@@ -20,12 +20,6 @@ Demo: http://demo.tzportfolio.com/
 
 *** Changelog ***
 
-06/20/2014 - 3.2.2
-
-	Fix some error.
-	Insert Association for category and article with joomla 3.3.1
-	Update languages: Portuguese (Brazil), Japanese (Japan), Russian (Russia) from transifex
-	
 05/07/2014 - 3.2.1
 	
 	Fix some error with joomla 3.3

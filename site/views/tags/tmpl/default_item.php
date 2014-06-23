@@ -50,7 +50,7 @@ $this -> assign('listMedia',$listMedia);
     <div class="muted TzTagArticleInfo">
         <?php if ($params->get('show_create_date')) : ?>
         <span class="TzTagDate">
-            <span class="date" itemprop="dateCreated">
+            <span class="date">
                 <?php echo JText::sprintf('COM_CONTENT_CREATED_DATE_ON',
                         JHtml::_('date', $row->created, JText::_('DATE_FORMAT_LC2'))); ?>
             </span>
@@ -59,10 +59,9 @@ $this -> assign('listMedia',$listMedia);
         <?php endif; ?>
 
         <?php if ($params->get('show_author') && !empty($row->author )) : ?>
-        <span class="TzTagCreatedby" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="TzTagCreatedby">
             <?php $author =  $row->author; ?>
             <?php $author = ($row->created_by_alias ? $row->created_by_alias : $author);?>
-            <?php $author = '<span itemprop="name">' . $author . '</span>'; ?>
             <?php
             if(!$userItemid   = '&Itemid='.$this -> FindUserItemId($row->created_by)){
                 $userItemid = null;
@@ -71,7 +70,7 @@ $this -> assign('listMedia',$listMedia);
 
             <?php if ($params->get('link_author') == true):?>
             <?php 	echo JText::sprintf('COM_CONTENT_WRITTEN_BY' ,
-                JHtml::_('link', JRoute::_('index.php?option=com_tz_portfolio&view=users&created_by='.$row -> created_by.$userItemid), $author, array('itemprop' => 'url'))); ?>
+                JHtml::_('link', JRoute::_('index.php?option=com_tz_portfolio&view=users&created_by='.$row -> created_by.$userItemid), $author)); ?>
 
             <?php else :?>
             <?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', $author); ?>
@@ -90,11 +89,11 @@ $this -> assign('listMedia',$listMedia);
         <?php if ($params->get('show_category')) : ?>
         <span class="TzTagCategoryName">
             <?php $title = $this->escape($row->category_title);
-            $url = '<a href="' . JRoute::_(TZ_PortfolioHelperRoute::getCategoryRoute($row->catid)) . '" itemprop="genre">' . $title . '</a>'; ?>
+            $url = '<a href="' . JRoute::_(TZ_PortfolioHelperRoute::getCategoryRoute($row->catid)) . '">' . $title . '</a>'; ?>
             <?php if ($params->get('link_category')) : ?>
             <?php echo JText::sprintf('COM_CONTENT_CATEGORY', $url); ?>
             <?php else : ?>
-            <?php echo JText::sprintf('COM_CONTENT_CATEGORY', '<span itemprop="genre">' . $title . '</span>'); ?>
+            <?php echo JText::sprintf('COM_CONTENT_CATEGORY', $title); ?>
             <?php endif; ?>
             <span class="TzLine">|</span>
         </span>
@@ -104,44 +103,43 @@ $this -> assign('listMedia',$listMedia);
           <span class="TzTagHits">
               <span class="numbers"><?php echo  $row->hits; ?></span>
               <span class="hits"><?php echo JText::_('ARTICLE_HITS'); ?></span>
-            <meta itemprop="interactionCount" content="UserPageVisits:<?php echo $row->hits; ?>" />
               <span class="TzLine">|</span>
           </span>
         <?php endif; ?>
 
         <?php if ($params->get('show_modify_date')) : ?>
-        <span class="TzTagModified" itemprop="dateModified">
+        <span class="TzTagModified">
             <?php echo JText::sprintf('COM_CONTENT_LAST_UPDATED', JHtml::_('date', $row->modified, JText::_('DATE_FORMAT_LC2'))); ?>
             <span class="TzLine">|</span>
         </span>
         <?php endif; ?>
 
         <?php if ($params->get('show_publish_date')) : ?>
-        <span class="TzTagPublished" itemprop="datePublished">
+        <span class="TzTagPublished">
             <?php echo JText::sprintf('COM_CONTENT_PUBLISHED_DATE_ON', JHtml::_('date', $row->publish_up, JText::_('DATE_FORMAT_LC2'))); ?>
             <span class="TzLine">|</span>
         </span>
         <?php endif; ?>
 
         <?php if($params -> get('tz_show_count_comment',1) == 1):?>
-        <span class="TzPortfolioCommentCount" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
+        <span class="TzPortfolioCommentCount">
             <?php echo JText::_('COM_TZ_PORTFOLIO_COMMENT_COUNT');?>
 
             <?php if($params -> get('comment_function_type','js') == 'js'):?>
                 <?php if($params -> get('tz_comment_type') == 'disqus'): ?>
-                    <a href="<?php echo $row -> fullLink;?>#disqus_thread" itemprop="commentCount"><?php echo $row -> commentCount;?></a>
+                    <a href="<?php echo $row -> fullLink;?>#disqus_thread"><?php echo $row -> commentCount;?></a>
                 <?php elseif($params -> get('tz_comment_type') == 'facebook'):?>
-                    <span class="fb-comments-count" data-href="<?php echo $row -> fullLink;?>" itemprop="commentCount"></span>
+                    <span class="fb-comments-count" data-href="<?php echo $row -> fullLink;?>"></span>
                 <?php endif;?>
             <?php else:?>
                 <?php if($params -> get('tz_comment_type') == 'facebook'): ?>
                     <?php if(isset($row -> commentCount)):?>
-                        <span itemprop="commentCount"><?php echo $row -> commentCount;?></span>
+                        <span><?php echo $row -> commentCount;?></span>
                     <?php endif;?>
                 <?php endif;?>
                 <?php if($params -> get('tz_comment_type') == 'disqus'):?>
                     <?php if(isset($row -> commentCount)):?>
-                        <span itemprop="commentCount"><?php echo $row -> commentCount;?></span>
+                        <span><?php echo $row -> commentCount;?></span>
                     <?php endif;?>
                 <?php endif;?>
             <?php endif;?>
@@ -152,7 +150,7 @@ $this -> assign('listMedia',$listMedia);
                     if (file_exists($comments)){
                         require_once($comments);
                         if(class_exists('JComments')){?>
-                        <span itemprop="commentCount"><?php echo JComments::getCommentsCount((int) $row -> id,'com_tz_portfolio');?></span>
+                        <span><?php echo JComments::getCommentsCount((int) $row -> id,'com_tz_portfolio');?></span>
                 <?php
                         }
                     }
@@ -185,11 +183,10 @@ $this -> assign('listMedia',$listMedia);
     <?php endif; ?>
 
     <?php if($params -> get('show_title')): ?>
-    <h3 class="TzTagTitle" itemprop="name">
+    <h3 class="TzTagTitle">
         <?php if($params->get('link_titles')) : ?>
             <a href="<?php echo $row ->link; ?>"
-                <?php if($params -> get('tz_use_lightbox') == 1){echo ' class="fancybox fancybox.iframe"';}?>
-                itemprop="url">
+                <?php if($params -> get('tz_use_lightbox') == 1){echo ' class="fancybox fancybox.iframe"';}?>>
                 <?php echo $this->escape($row -> title); ?>
             </a>
         <?php else : ?>
@@ -222,9 +219,7 @@ $this -> assign('listMedia',$listMedia);
     <?php echo $row -> event -> TZbeforeDisplayContent; ?>
 
     <?php  if ($params->get('show_intro',1) AND !empty($row -> introtext)) :?>
-    <div class="TzDescription" itemprop="description">
        <?php echo $row -> introtext;?>
-    </div>
     <?php endif; ?>
 
     <?php if ($params->get('show_readmore') && $row->readmore) :

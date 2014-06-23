@@ -52,8 +52,7 @@ if($params -> get('tz_use_lightbox',1) == 1){
                     <a<?php echo $class;?> href="<?php echo $link?>">
                         <img src="<?php echo $src;?>"
                              alt="<?php echo ($media[0] -> imagetitle)?($media[0] -> imagetitle):($this -> item -> title);?>"
-                             title="<?php echo ($media[0] -> imagetitle)?($media[0] -> imagetitle):($this -> item -> title);?>"
-                             itemprop="thumbnailUrl"/>
+                             title="<?php echo ($media[0] -> imagetitle)?($media[0] -> imagetitle):($this -> item -> title);?>"/>
 
                         <?php if($params -> get('tz_use_image_hover',1) == 1):?>
                             <?php if(isset($srcHover)):?>
@@ -85,8 +84,7 @@ if($params -> get('tz_use_lightbox',1) == 1){
                     <a<?php echo $class;?> href="<?php echo $link?>">
                         <img src="<?php echo $srcGallery;?>"
                              alt="<?php echo ($media[0] -> imagetitle)?($media[0] -> imagetitle):($this -> item -> title);?>"
-                             title="<?php echo ($media[0] -> imagetitle)?($media[0] -> imagetitle):($this -> item -> title);?>"
-                             itemprop="thumbnailUrl"/>
+                             title="<?php echo ($media[0] -> imagetitle)?($media[0] -> imagetitle):($this -> item -> title);?>"/>
                     </a>
                 </div>
             <?php endif;?>
@@ -103,8 +101,7 @@ if($params -> get('tz_use_lightbox',1) == 1){
                     <a<?php echo $class;?> href="<?php echo $link?>">
                         <img src="<?php echo $srcVideo;?>"
                              title="<?php echo ($media[0] -> imagetitle)?($media[0] -> imagetitle):($this -> item -> title);?>"
-                             alt="<?php echo ($media[0] -> imagetitle)?($media[0] -> imagetitle):($this -> item -> title);?>"
-                             itemprop="thumbnailUrl"/>
+                             alt="<?php echo ($media[0] -> imagetitle)?($media[0] -> imagetitle):($this -> item -> title);?>"/>
                     </a>
                 </div>
             <?php endif;?>

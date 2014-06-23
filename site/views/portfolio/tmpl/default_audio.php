@@ -25,54 +25,54 @@ $params     = $this -> item -> params;
 $audioOption= '';
 if(count($media)):
     if($params -> get('show_soundcloud_artwork',1)){
-        $audioOption    .= '&amp;show_artwork=true';
+        $audioOption    .= '&show_artwork=true';
     }else{
-        $audioOption    .= '&amp;show_artwork=false';
+        $audioOption    .= '&show_artwork=false';
     }
     if($params -> get('soundcloud_auto_play',0)){
-        $audioOption    .= '&amp;auto_play=true';
+        $audioOption    .= '&auto_play=true';
     }else{
-        $audioOption    .= '&amp;auto_play=false';
+        $audioOption    .= '&auto_play=false';
     }
     if($params -> get('show_soundcloud_sharing',1)){
-        $audioOption    .= '&amp;sharing=true';
+        $audioOption    .= '&sharing=true';
     }else{
-        $audioOption    .= '&amp;sharing=false';
+        $audioOption    .= '&sharing=false';
     }
     if($params -> get('show_soundcloud_buying',1)){
-        $audioOption    .= '&amp;buying=true';
+        $audioOption    .= '&buying=true';
     }else{
-        $audioOption    .= '&amp;buying=false';
+        $audioOption    .= '&buying=false';
     }
     if($params -> get('show_soundcloud_download',1)){
-        $audioOption    .= '&amp;download=true';
+        $audioOption    .= '&download=true';
     }else{
-        $audioOption    .= '&amp;download=false';
+        $audioOption    .= '&download=false';
     }
     if($params -> get('show_soundcloud_user',1)){
-        $audioOption    .= '&amp;show_user=true';
+        $audioOption    .= '&show_user=true';
     }else{
-        $audioOption    .= '&amp;show_user=false';
+        $audioOption    .= '&show_user=false';
     }
     if($params -> get('show_soundcloud_playcount',1)){
-        $audioOption    .= '&amp;show_playcount=true';
+        $audioOption    .= '&show_playcount=true';
     }else{
-        $audioOption    .= '&amp;show_playcount=false';
+        $audioOption    .= '&show_playcount=false';
     }
     if($params -> get('show_soundcloud_comments',1)){
-        $audioOption    .= '&amp;show_comments=true';
+        $audioOption    .= '&show_comments=true';
     }else{
-        $audioOption    .= '&amp;show_comments=false';
+        $audioOption    .= '&show_comments=false';
     }
 
     if($color   = $params -> get('audio_soundcloud_color','transparent')){
         if($color != 'transparent'){
-            $audioOption    .= '&amp;color='.str_replace('#','',$color);
+            $audioOption    .= '&color='.str_replace('#','',$color);
         }
     }
     if($themeColor   = $params -> get('audio_soundcloud_theme_color','transparent')){
         if($themeColor != 'transparent'){
-            $audioOption    .= '&amp;theme_color='.$themeColor;
+            $audioOption    .= '&theme_color='.$themeColor;
         }
     }
     if($audioWidth   = $params -> get('audio_soundcloud_width','100%')){
@@ -92,12 +92,11 @@ if(count($media)):
         if($media[0] -> type == 'audio'):
 
         ?>
-            <div class="tz_audio" itemprop="audio" itemscope itemtype="http://schema.org/AudioObject">
+            <div class="tz_audio">
                 <iframe width="<?php echo $audioWidth;?>"
                         height="<?php echo $audioHeight;?>"
                         src="http://w.soundcloud.com/player/?url=http://api.soundcloud.com/tracks/<?php echo $media[0] -> audio_id.$audioOption;?>"
-                        frameborder="0" allowfullscreen
-                    itemprop="embedUrl">
+                        frameborder="0" allowfullscreen>
                 </iframe>
             </div>
         <?php endif;?>

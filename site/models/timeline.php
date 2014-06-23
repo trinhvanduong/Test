@@ -98,8 +98,6 @@ class TZ_PortfolioModelTimeLine extends JModelList
             $this->setState('filter.published', array(0, 1, 2));
         }
 
-        $this->setState('filter.language', $app->getLanguageFilter());
-
         $params -> set('useCloudZoom',0);
         $this -> setState('list.start',JRequest::getUInt('limitstart',0));
         $this -> setState('list.limit',$limit);
@@ -140,9 +138,6 @@ class TZ_PortfolioModelTimeLine extends JModelList
         else {
             $this->setState('filter.published', array(0, 1, 2));
         }
-
-        $app    = JFactory::getApplication();
-        $this->setState('filter.language', $app->getLanguageFilter());
 
         $this -> setState('list.limit',$limit);
         $this -> setState('list.start',$offset);
@@ -669,12 +664,6 @@ class TZ_PortfolioModelTimeLine extends JModelList
         $query -> select('('.$subQuery -> __toString().') AS maxhits');
         /** End query **/
 
-        // Filter by language
-        if ($this->getState('filter.language')) {
-            $query->where('c.language in ('.$db->quote(JFactory::getLanguage()->getTag()).','.$db->quote('*').')');
-//            $query->where('(contact.language in ('.$db->quote(JFactory::getLanguage()->getTag()).','.$db->quote('*').') OR contact.language IS NULL)');
-        }
-
         return $query;
     }
 
@@ -981,7 +970,7 @@ class TZ_PortfolioModelTimeLine extends JModelList
                 if($model  = JModelLegacy::getInstance('Media','TZ_PortfolioModel')){
                     if($media  = $model -> getMedia($item -> id)){
 
-                        if($media[0] -> type != 'video' && $media[0] -> type != 'audio'){
+                        if($media[0] -> type != 'video'){
                             if($params -> get('portfolio_image_size','M')){
 
 

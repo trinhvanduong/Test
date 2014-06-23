@@ -24,40 +24,33 @@ defined('_JEXEC') or die('Restricted access');
 <?php
 $list   = $this -> listsArticle;
 $params = $this -> params;
-
-$pagination = $this -> pagination -> getData();
 ?>
 <?php if($list):?>
-<div id="TzTimline" itemscope itemtype="http://schema.org/Blog">
-    <div class="TzTimlineWrap">
+    <div id="TzTimline">
+            <div class="TzTimlineWrap">
+                <div class="ss-links" id="ss-links">
+                    <?php echo $this -> loadTemplate('date');?>
+                </div><!-- end main-menu -->
+                <div id="ss-container" class="ss-container">
+                    <?php echo $this -> loadTemplate('item');?>
 
-        <div class="ss-links" id="ss-links">
-            <?php if($this -> pagination -> pagesCurrent > 1): ?>
-            <a href="<?php echo $pagination -> start ->link?>">
-                <?php echo $pagination -> start -> text;?>
-            </a>
-            <a href="<?php echo $pagination -> previous ->link?>">
-                <?php echo $pagination -> previous -> text;?>
-            </a>
-            <?php endif;?>
+                </div>
+            </div>
+    </div><!-- end contact -->
 
-            <?php if($params -> get('class_show_time_links',1)):?>
-            <?php echo $this -> loadTemplate('date');?>
-            <?php endif;?>
 
-            <?php if($this -> pagination -> pagesCurrent < $this -> pagination -> pagesTotal): ?>
-            <a href="<?php echo $pagination -> next ->link?>">
-                <?php echo $pagination -> next -> text;?>
-            </a>
-            <a href="<?php echo $pagination -> end ->link?>">
-                <?php echo $pagination -> end -> text;?>
-            </a>
-            <?php endif;?>
-        </div><!-- end main-menu -->
-        <div id="ss-container" class="ss-container">
-            <?php echo $this -> loadTemplate('item');?>
-
+    <?php //if($params -> get('tz_timeline_layout','default') == 'default'):?>
+        <div class="TzTimlinePagination">
+            <?php echo $this -> pagination -> getPagesLinks();?>
         </div>
-    </div>
-</div><!-- end contact -->
+        <script type="text/javascript">
+          var tz = jQuery.noConflict();
+
+          next = tz('.TzTimlinePagination .pagination-next').html();
+          preview = tz('.TzTimlinePagination .pagination-prev').html();
+
+          tz('#ss-links').append(next);
+          tz('#ss-links').append(preview);
+        </script>
+    <?php //endif;?>
 <?php endif;?>

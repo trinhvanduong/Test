@@ -65,8 +65,7 @@ JFactory::getLanguage()->load('com_tz_portfolio');
              data-date="<?php echo strtotime($row -> created); ?>"
              data-title="<?php echo $this->escape($row -> title); ?>"
              data-hits="<?php echo (int) $row -> hits; ?>"
-             class="element <?php echo $class.$tzItemClass.$tzItemFeatureClass;?>"
-             itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+             class="element <?php echo $class.$tzItemClass.$tzItemFeatureClass;?>">
             <div class="TzInner">
                 <!-- Begin Icon print, Email or Edit -->
                 <?php if($params -> get('show_icons',0)):?>
@@ -113,10 +112,9 @@ JFactory::getLanguage()->load('com_tz_portfolio');
 
                     <div class="TzPortfolioDescription">
                         <?php if($params -> get('show_title',1)): ?>
-                        <h3 class="TzPortfolioTitle name" itemprop="name">
+                        <h3 class="TzPortfolioTitle name">
                             <?php if($params->get('link_titles',1)) : ?>
-                                <a<?php if($params -> get('tz_use_lightbox') == 1){echo ' class="fancybox fancybox.iframe"';}?>
-                                    href="<?php echo $row ->link; ?>"  itemprop="url">
+                                <a<?php if($params -> get('tz_use_lightbox') == 1){echo ' class="fancybox fancybox.iframe"';}?> href="<?php echo $row ->link; ?>">
                                     <?php echo $this->escape($row -> title); ?>
                                 </a>
                             <?php else : ?>
@@ -140,7 +138,7 @@ JFactory::getLanguage()->load('com_tz_portfolio');
                         <?php echo $row -> event -> beforeDisplayContent; ?>
                         <?php echo $row -> event -> TZbeforeDisplayContent; ?>
                         <?php  if ($params->get('show_intro',1) AND !empty($row -> introtext)) :?>
-                        <div class="TzPortfolioIntrotext" itemprop="description">
+                        <div class="TzPortfolioIntrotext">
                            <?php echo $row -> introtext;?>
                         </div>
                         <?php endif; ?>
@@ -154,34 +152,33 @@ JFactory::getLanguage()->load('com_tz_portfolio');
                         <?php if ($params->get('show_category',1)) : ?>
                         <div class="TZcategory-name">
                             <?php $title = $this->escape($row->category_title);
-                            $url = '<a href="' . JRoute::_(TZ_PortfolioHelperRoute::getCategoryRoute($row->catid)) . '" itemprop="genre">' . $title . '</a>'; ?>
+                            $url = '<a href="' . JRoute::_(TZ_PortfolioHelperRoute::getCategoryRoute($row->catid)) . '">' . $title . '</a>'; ?>
                             <?php if ($params->get('link_category',1)) : ?>
                             <?php echo JText::sprintf('COM_CONTENT_CATEGORY', $url); ?>
                             <?php else : ?>
-                            <?php echo JText::sprintf('COM_CONTENT_CATEGORY', '<span itemprop="genre">' . $title . '</span>'); ?>
+                            <?php echo JText::sprintf('COM_CONTENT_CATEGORY', $title); ?>
                             <?php endif; ?>
                         </div>
                         <?php endif; ?>
                         <?php if ($params->get('show_create_date',1)) : ?>
-                        <div class="TzPortfolioDate" itemprop="dateCreated">
+                        <div class="TzPortfolioDate">
                             <?php echo JText::sprintf('COM_CONTENT_CREATED_DATE_ON', JHtml::_('date', $row->created, JText::_('DATE_FORMAT_LC2'))); ?>
                         </div>
                         <?php endif; ?>
                         <?php if ($params->get('show_modify_date')) : ?>
-                        <div class="TzPortfolioModified" itemprop="dateModified">
+                        <div class="TzPortfolioModified">
                             <?php echo JText::sprintf('COM_CONTENT_LAST_UPDATED', JHtml::_('date', $row->modified, JText::_('DATE_FORMAT_LC2'))); ?>
                         </div>
                         <?php endif; ?>
                         <?php if ($params->get('show_publish_date',1)) : ?>
-                        <div class="published" itemprop="datePublished">
+                        <div class="published">
                             <?php echo JText::sprintf('COM_CONTENT_PUBLISHED_DATE_ON', JHtml::_('date', $row->publish_up, JText::_('DATE_FORMAT_LC2'))); ?>
                         </div>
                         <?php endif; ?>
                         <?php if ($params->get('show_author') && !empty($row->author )) : ?>
-                        <div class="TzPortfolioCreatedby" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                        <div class="TzPortfolioCreatedby">
                             <?php $author =  $row->author; ?>
                             <?php $author = ($row->created_by_alias ? $row->created_by_alias : $author);?>
-                            <?php $author = '<span itemprop="name">' . $author . '</span>'; ?>
                             <?php
                                 if(!$userItemid = '&Itemid='.$this -> FindUserItemId($row -> created_by)){
                                     $userItemid = null;
@@ -190,7 +187,7 @@ JFactory::getLanguage()->load('com_tz_portfolio');
 
                             <?php if ($params->get('link_author') == true):?>
                             <?php 	echo JText::sprintf('COM_CONTENT_WRITTEN_BY' ,
-                                JHtml::_('link', JRoute::_('index.php?option=com_tz_portfolio&amp;view=users&amp;created_by='.$row -> created_by.$userItemid), $author, array('itemprop' => 'url'))); ?>
+                                JHtml::_('link', JRoute::_('index.php?option=com_tz_portfolio&amp;view=users&amp;created_by='.$row -> created_by.$userItemid), $author)); ?>
 
                             <?php else :?>
                             <?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', $author); ?>
@@ -200,15 +197,14 @@ JFactory::getLanguage()->load('com_tz_portfolio');
                         <?php if ($params->get('show_hits')) : ?>
                         <div class="TzPortfolioHits">
                             <?php echo JText::sprintf('COM_CONTENT_ARTICLE_HITS', $row->hits); ?>
-                            <meta itemprop="interactionCount" content="UserPageVisits:<?php echo $row->hits; ?>" />
                         </div>
                         <?php endif; ?>
                         <?php if($params -> get('tz_show_count_comment',1) == 1):?>
-                            <div class="TzPortfolioCommentCount" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
+                            <div class="TzPortfolioCommentCount">
                                 <?php echo JText::_('COM_TZ_PORTFOLIO_COMMENT_COUNT');?>
                                 <?php if($params -> get('tz_comment_type') == 'facebook'): ?>
                                     <?php if(isset($row -> commentCount)):?>
-                                        <span itemprop="commentCount"><?php echo $row -> commentCount;?></span>
+                                        <span><?php echo $row -> commentCount;?></span>
                                     <?php endif;?>
                                 <?php endif;?>
 
@@ -220,14 +216,14 @@ JFactory::getLanguage()->load('com_tz_portfolio');
                                             if(class_exists('JComments')){
                                     ?>
 
-                                        <span itemprop="commentCount"><?php echo JComments::getCommentsCount((int) $row -> id,'com_tz_portfolio');?></span>
+                                        <span><?php echo JComments::getCommentsCount((int) $row -> id,'com_tz_portfolio');?></span>
                                     <?php   }
                                         }
                                     ?>
                                 <?php endif;?>
                                 <?php if($params -> get('tz_comment_type','disqus') == 'disqus'):?>
                                     <?php if(isset($row -> commentCount)):?>
-                                        <span itemprop="commentCount"><?php echo $row -> commentCount;?></span>
+                                        <span><?php echo $row -> commentCount;?></span>
                                     <?php endif;?>
                                 <?php endif;?>
                             </div>

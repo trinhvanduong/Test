@@ -191,7 +191,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
             <?php endif;?>
         </div>
 
-        <div id="timeline" class="super-list variable-sizes clearfix"  itemscope itemtype="http://schema.org/Blog">
+        <div id="timeline" class="super-list variable-sizes clearfix">
             <?php echo $this -> loadTemplate('item');?>
         </div>
 

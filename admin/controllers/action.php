@@ -38,7 +38,7 @@ class TZ_PortfolioControllerAction extends JControllerAdmin{
         if(isset($result) && $result == 1){
             $app -> redirect($return,JText::_('COM_TZ_PORTFOLIO_ENABLE_DEVELOPMENT_MODE_NOT_FOUND_FILES'),'error');
         }
-        $app -> redirect($return,JText::_('COM_TZ_PORTFOLIO_SUCCESSFULL_COMPILE_LESS_TO_CSS'),'message');
+        $app -> redirect($return,JText::_('COM_TZ_PORTFOLIO_SUCCESSFULL_COMPILE_LESS_TO_CSS'));
 
     }
 
@@ -56,6 +56,6 @@ class TZ_PortfolioControllerAction extends JControllerAdmin{
         if(isset($result) && $result == 1){
             $app -> redirect($return,JText::_('COM_TZ_PORTFOLIO_ENABLE_DEVELOPMENT_MODE_NOT_FOUND_FILES'),'error');
         }
-        $app -> redirect($return,JText::_('COM_TZ_PORTFOLIO_SUCCESSFULL_COMPRESS_JAVASCRIPT'),'message');
+        $app -> redirect($return,JText::_('COM_TZ_PORTFOLIO_SUCCESSFULL_COMPRESS_JAVASCRIPT'));
     }
 }

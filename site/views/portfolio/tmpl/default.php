@@ -185,8 +185,7 @@ $doc -> addScript(JUri::base(true).'/components/com_tz_portfolio/js/base64.js');
             <?php endif;?>
         </div>
 
-        <div id="portfolio" class="super-list variable-sizes clearfix"
-             itemscope itemtype="http://schema.org/Blog">
+        <div id="portfolio" class="super-list variable-sizes clearfix">
             <?php echo $this -> loadTemplate('item');?>
         </div>
 
